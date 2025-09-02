@@ -38,7 +38,7 @@ export default function Hero() {
 
     {/* Register Now Button */}
     <a
-      href="YOUR_GOOGLE_FORM_LINK"
+      href="https://forms.gle/AE3vg9kJQVBPoH1v7"
       target="_blank"
       rel="noopener noreferrer"
       className="inline-block px-6 py-3 bg-red-500 text-white text-2xl rounded-lg hover:bg-red-600 transition"
