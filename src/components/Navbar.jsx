@@ -6,7 +6,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = ["Home", "About", "Problem Statements"];
-  const googleFormLink = "YOUR_GOOGLE_FORM_LINK"; // replace with actual
+  const googleFormLink = "https://forms.gle/AE3vg9kJQVBPoH1v7"; // replace with actual
 
   return (
     <motion.nav
