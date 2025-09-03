@@ -6,8 +6,9 @@ import takshakLogo from "../assets/takshak-removebg-preview.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const menuItems = ["Home", "About", "Problem Statements"];
-  const googleFormLink = "https://forms.gle/fsNv9g1kub11mt3Y7"; // replace with actual
+  
+  const googleFormLink = "https://forms.gle/AE3vg9kJQVBPoH1v7"; // replace with actual
+
 
   return (
     <>

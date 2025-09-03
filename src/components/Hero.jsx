@@ -30,6 +30,7 @@ export default function Hero() {
             HackTillDawn
           </motion.h1>
 
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,11 +41,12 @@ export default function Hero() {
             <span className="text-red-400 font-semibold">September 25–26</span>
           </motion.p>
 
+
           {/* Register Now Button */}
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            href="https://forms.gle/fsNv9g1kub11mt3Y7"
+            href="https://forms.gle/AE3vg9kJQVBPoH1v7"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-3 text-lg md:text-xl font-semibold rounded-lg 
