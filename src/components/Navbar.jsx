@@ -6,9 +6,11 @@ import takshakLogo from "../assets/takshak-removebg-preview.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  
-  const googleFormLink = "https://forms.gle/AE3vg9kJQVBPoH1v7"; // replace with actual
+  // Google Form Link
+  const googleFormLink = "https://forms.gle/AE3vg9kJQVBPoH1v7";
 
+  // Menu Items
+  const menuItems = ["Home", "About", "Problem Statement"];
 
   return (
     <>
@@ -49,6 +51,7 @@ export default function Navbar() {
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-red-500 transition-all duration-300 group-hover:w-full"></span>
               </li>
             ))}
+            {/* Register Button */}
             <li>
               <a
                 href={googleFormLink}
@@ -56,7 +59,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="text-red-400 text-base md:text-lg font-semibold uppercase border-2 border-red-500 px-4 py-2 rounded-xl transition-all duration-300 hover:bg-red-500 hover:text-black hover:shadow-lg hover:scale-105"
               >
-                Register Now
+                Register
               </a>
             </li>
           </ul>
@@ -79,7 +82,7 @@ export default function Navbar() {
             className="md:hidden bg-black/90 border-t border-red-500/40 backdrop-blur-md px-6 pb-6 pt-4 shadow-xl"
           >
             <ul className="flex flex-col space-y-5">
-              {( (
+              {menuItems.map((item, i) => (
                 <li key={i}>
                   <a
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
@@ -90,6 +93,7 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
+              {/* Register Button in Mobile */}
               <li>
                 <a
                   href={googleFormLink}
@@ -98,7 +102,7 @@ export default function Navbar() {
                   className="text-red-400 text-lg font-semibold uppercase border border-red-500 px-4 py-2 rounded-lg text-center transition-all duration-300 hover:bg-red-500 hover:text-black hover:shadow-lg hover:scale-105 block"
                   onClick={() => setIsOpen(false)}
                 >
-                  Register Now
+                  Register
                 </a>
               </li>
             </ul>
