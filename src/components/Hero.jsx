@@ -27,7 +27,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="text-5xl md:text-6xl font-bold mb-6"
           >
-            HACK SPRINT
+            HackTillDawn
           </motion.h1>
 
           <motion.p
