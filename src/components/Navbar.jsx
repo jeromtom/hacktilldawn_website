@@ -78,7 +78,7 @@ export default function Navbar() {
             className="md:hidden bg-black/90 border-t border-red-500/40 backdrop-blur-md px-6 pb-6 pt-4 shadow-xl"
           >
             <ul className="flex flex-col space-y-5">
-              {menuItems.map((item, i) => (
+              {( (
                 <li key={i}>
                   <a
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
