@@ -8,9 +8,10 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
+        style={{ fontFamily: "Orbitron, sans-serif" }}
         className="text-3xl font-bold mb-4 text-white"
       >
-        About Hack Sprint
+        About HackTillDawn
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 20 }}

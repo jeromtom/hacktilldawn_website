@@ -25,6 +25,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            style={{ fontFamily: "Orbitron, sans-serif" }}
             className="text-5xl md:text-6xl font-bold mb-6"
           >
             HackTillDawn
@@ -44,7 +45,7 @@ export default function Hero() {
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            href="https://forms.gle/fsNv9g1kub11mt3Y7"
+            href="https://forms.gle/AE3vg9kJQVBPoH1v7"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-3 text-lg md:text-xl font-semibold rounded-lg 
