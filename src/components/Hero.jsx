@@ -31,6 +31,7 @@ export default function Hero() {
             HackTillDawn
           </motion.h1>
 
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,6 +41,7 @@ export default function Hero() {
             Join the 18-hour mini hackathon on{" "}
             <span className="text-red-400 font-semibold">September 25–26</span>
           </motion.p>
+
 
           {/* Register Now Button */}
           <motion.a
