@@ -179,8 +179,8 @@ export default function ProblemCards() {
   return (
     <section id="problem-statements" className="py-20 px-6 bg-black text-center min-h-screen">
       {/* Hardware Track */}
-      <div className="mb-16">
-        <h2 className="text-4xl text-white font-bold mb-4 bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+      <div className="mb-16" >
+        <h2 style={{ fontFamily: "Orbitron, sans-serif" }} className="text-4xl text-white font-bold mb-4 bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
           Hardware Track
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-red-700 mx-auto mb-12 rounded-full"></div>
@@ -204,7 +204,7 @@ export default function ProblemCards() {
 
       {/* Software Track */}
       <div>
-        <h2 className="text-4xl text-white font-bold mb-4 bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+        <h2 style={{ fontFamily: "Orbitron, sans-serif" }} className="text-4xl text-white font-bold mb-4 bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
           Software Track
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-red-700 mx-auto mb-12 rounded-full"></div>

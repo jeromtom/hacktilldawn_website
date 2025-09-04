@@ -21,7 +21,7 @@ export default function Footer() {
         
         {/* Left - Event Info */}
         <div>
-          <h3 className="text-xl font-bold text-white mb-4">Hack Sprint</h3>
+          <h3 className="text-xl font-bold text-white mb-4">HackTillDawn</h3>
           <p className="text-gray-400 text-sm leading-relaxed">
             An 18-hour mini hackathon organized as part of{" "}
             <span className="text-red-400 font-medium">Takshak 2025</span>.  

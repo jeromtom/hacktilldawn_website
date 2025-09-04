@@ -45,6 +45,7 @@ export default function Countdown() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
+        style={{ fontFamily: "Orbitron, sans-serif" }}
         className="text-4xl font-bold mb-10 bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent"
       >
         Event Starts In
