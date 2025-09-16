@@ -39,14 +39,17 @@ export default function Countdown() {
   ];
 
   return (
-    <section id="countdown" className="py-20 bg-black text-center relative">
+    <section
+      id="countdown"
+      className="py-20 relative text-center overflow-hidden bg-gradient-to-b from-black via-[#0a0f2c] to-[#001a33]"
+    >
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         style={{ fontFamily: "Orbitron, sans-serif" }}
-        className="text-4xl font-bold mb-10 bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent"
+        className="text-4xl font-bold mb-10 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(56,189,248,0.7)]"
       >
         Event Starts In
       </motion.h2>
@@ -58,22 +61,25 @@ export default function Countdown() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="w-28 h-28 flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-black via-red-900/40 to-red-800/40 border border-red-500/50 shadow-lg shadow-red-600/30"
+            className="w-28 h-28 flex flex-col items-center justify-center rounded-2xl 
+                       bg-gradient-to-br from-[#0a0f2c] via-[#1e3a8a66] to-[#2563eb33] 
+                       border border-blue-500/40 shadow-lg shadow-blue-500/30"
           >
-            <span className="text-3xl font-extrabold text-white drop-shadow-[0_0_6px_rgba(255,0,0,0.8)]">
+            <span className="text-3xl font-extrabold text-blue-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]">
               {unit.value}
             </span>
-            <span className="text-sm text-red-300 font-medium uppercase tracking-wide">
+            <span className="text-sm text-cyan-300 font-medium uppercase tracking-wide">
               {unit.label}
             </span>
           </motion.div>
         ))}
       </div>
 
-      {/* Glow effect behind countdown */}
+      {/* Cosmic glow behind countdown */}
       <div className="absolute inset-0 -z-10 flex justify-center items-center">
-        <div className="w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl"></div>
+        <div className="w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl"></div>
       </div>
     </section>
   );
 }
+
