@@ -165,7 +165,7 @@ export default function ProblemCards() {
   );
 
   return (
-    <section id="problem-statements" className="py-24 px-6 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center min-h-screen">
+    <section id="problem-statement" className="py-24 px-6 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center min-h-screen">
       {/* Hardware Track */}
       <div className="mb-20">
         <div className="mb-16">
