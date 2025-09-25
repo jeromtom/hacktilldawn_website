@@ -128,16 +128,22 @@ export default function handler(req, res) {
         return;
     }
 
-    // Validate webhook signature in production
+    // Validate webhook secret in production
     if (process.env.NODE_ENV === 'production') {
-        const signature = req.headers['x-whapi-signature'] || req.headers['x-hub-signature-256'];
-        if (!signature) {
-            console.warn('Missing webhook signature in production');
-            return res.status(401).json({ error: 'Missing signature' });
+        const webhookSecret = req.headers['x-webhook-secret'];
+        const expectedSecret = process.env.WHAPI_WEBHOOK_SECRET;
+        
+        if (!webhookSecret || !expectedSecret) {
+            console.warn('Missing webhook secret in production');
+            return res.status(401).json({ error: 'Missing webhook secret' });
         }
         
-        // Note: In a real implementation, you'd validate the signature here
-        // For now, we'll just check if it exists
+        if (webhookSecret !== expectedSecret) {
+            console.warn('Invalid webhook secret');
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+        
+        console.log('Webhook secret validated successfully');
     }
     
     const { body } = req;

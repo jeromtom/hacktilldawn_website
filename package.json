@@ -12,6 +12,8 @@
     "preview": "vite preview",
     "test:webhook": "node ./test-integrated-webhook.js",
     "test:local": "node test-local-webhook.js",
+    "test:real-data": "node test-real-data.js",
+    "setup:real-data": "node setup-real-data.js",
     "start": "node local-server.js",
     "start:fetcher": "node -e \"import('./api/message-fetcher.js').then(m => m.default.start())\"",
     "health": "curl http://localhost:3000/api/health",
