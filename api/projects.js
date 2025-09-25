@@ -1,4 +1,73 @@
-import { sampleProjects, hackathonMetadata } from '../data/sample/sample-projects.js';
+// Sample projects data for testing and demonstration
+const sampleProjects = [
+  {
+    name: "EcoTrack - Carbon Footprint Tracker",
+    description: "A comprehensive mobile app that helps users track their daily carbon footprint through AI-powered analysis of their activities, purchases, and transportation choices. Features include real-time emissions calculation, personalized eco-friendly recommendations, and gamification elements to encourage sustainable living.",
+    url: "https://github.com/ecotrack-team/carbon-footprint-app",
+    teamName: "EcoTrack Team",
+    teamMembers: "Sarah Chen, Alex Rodriguez, Maria Santos",
+    sender: "Sarah Chen",
+    groupName: "HackTillDawn Final Participants",
+    timestamp: "2025-09-25T10:30:00.000Z",
+    messageId: "sample-1",
+    reactions: [
+      { emoji: "🔥", sender: "Alex Rodriguez", timestamp: "2025-09-25T10:35:00.000Z" },
+      { emoji: "💚", sender: "Maria Santos", timestamp: "2025-09-25T10:40:00.000Z" },
+      { emoji: "🚀", sender: "John Doe", timestamp: "2025-09-25T11:00:00.000Z" }
+    ],
+    replies: [
+      { 
+        message: "This looks amazing! The AI integration is really impressive.", 
+        sender: "Tech Reviewer", 
+        timestamp: "2025-09-25T10:45:00.000Z" 
+      }
+    ]
+  },
+  {
+    name: "MediConnect - Healthcare Bridge",
+    description: "An innovative platform that connects patients with healthcare providers in underserved areas using telemedicine technology. The app includes AI-powered symptom analysis, appointment scheduling, prescription management, and real-time video consultations with certified doctors.",
+    url: "https://github.com/mediconnect/healthcare-platform",
+    teamName: "MediConnect Team",
+    teamMembers: "Dr. Michael Rodriguez, Dr. Lisa Wang, James Chen",
+    sender: "Dr. Michael Rodriguez",
+    groupName: "HackTillDawn Final Participants",
+    timestamp: "2025-09-25T11:15:00.000Z",
+    messageId: "sample-2",
+    reactions: [
+      { emoji: "❤️", sender: "Dr. Lisa Wang", timestamp: "2025-09-25T11:20:00.000Z" },
+      { emoji: "👏", sender: "James Chen", timestamp: "2025-09-25T11:25:00.000Z" }
+    ],
+    replies: []
+  }
+];
+
+const hackathonMetadata = {
+  name: "HackTillDawn 2025",
+  theme: "Innovation for Tomorrow",
+  totalParticipants: 150,
+  submissionDeadline: "2025-09-25T23:59:59.000Z",
+  judgingCriteria: [
+    "Innovation and Creativity",
+    "Technical Implementation", 
+    "User Experience",
+    "Social Impact",
+    "Scalability"
+  ],
+  prizes: [
+    { place: 1, amount: "$10,000", title: "Grand Prize" },
+    { place: 2, amount: "$5,000", title: "Second Place" },
+    { place: 3, amount: "$2,500", title: "Third Place" },
+    { place: "Best AI", amount: "$1,000", title: "Best AI Implementation" },
+    { place: "Best Mobile", amount: "$1,000", title: "Best Mobile App" },
+    { place: "Best Web", amount: "$1,000", title: "Best Web Application" }
+  ],
+  sponsors: [
+    "TechCorp Inc.",
+    "Innovation Labs",
+    "Future Ventures",
+    "Digital Solutions Ltd."
+  ]
+};
 
 // In-memory data storage for Vercel serverless functions
 let projects = [
