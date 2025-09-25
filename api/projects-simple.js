@@ -1,5 +1,5 @@
 // Simple projects API that can work with sample data
-import { sampleProjects, hackathonMetadata } from './sample-projects.js';
+import { sampleProjects, hackathonMetadata } from '../data/sample/sample-projects.js';
 
 // In-memory storage for real projects (use database in production)
 let projects = [];
