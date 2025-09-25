@@ -322,7 +322,7 @@ export default function Hero() {
         </div>
       </section>
 
-      <style jsx>{`
+      <style jsx="true">{`
         @keyframes grid-move {
           0% { transform: translateX(0) translateY(0); }
           100% { transform: translateX(50px) translateY(50px); }

@@ -1,16 +1,30 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import newLogo from "../assets/htd_logo[1].png"; // Update this path with your uploaded image
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   // Google Form Link
   const googleFormLink = "https://forms.gle/AE3vg9kJQVBPoH1v7";
 
   // Menu Items
-  const menuItems = ["Home", "About", "Problem Statement"];
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/#about" },
+    { name: "Problem Statement", path: "/#problem-statement" },
+    { name: "Projects", path: "/projects" }
+  ];
+
+  const isActive = (path) => {
+    if (path === "/") {
+      return location.pathname === "/";
+    }
+    return location.pathname === path;
+  };
 
   return (
     <>
@@ -35,14 +49,16 @@ export default function Navbar() {
         <div className="relative max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-20">
           {/* Logo - Updated with new image */}
           <div className="flex items-center">
-            <img
-              src={newLogo}
-              alt="Logo"
-              className="h-20 md:h-24 lg:h-28 object-contain"
-            />
+            <Link to="/">
+              <img
+                src={newLogo}
+                alt="Logo"
+                className="h-20 md:h-24 lg:h-28 object-contain cursor-pointer hover:opacity-80 transition-opacity"
+              />
+            </Link>
           </div>
 
-          {/* Desktop Menu - Simplified and fixed */}
+          {/* Desktop Menu - Updated with routing */}
           <ul className="hidden lg:flex space-x-8 items-center">
             {menuItems.map((item, i) => (
               <motion.li 
@@ -52,17 +68,29 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 + 0.3, duration: 0.6 }}
               >
-                <a
-                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="text-slate-300 text-base font-medium uppercase tracking-wide 
-                           transition-all duration-300 hover:text-cyan-300 
-                           relative px-3 py-2 block"
+                <Link
+                  to={item.path}
+                  onClick={() => {
+                    // Scroll to top when navigating
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className={`text-base font-medium uppercase tracking-wide 
+                           transition-all duration-300 relative px-3 py-2 block
+                           ${isActive(item.path) 
+                             ? 'text-cyan-400' 
+                             : 'text-slate-300 hover:text-cyan-300'
+                           }`}
                 >
-                  {item}
+                  {item.name}
                   {/* Clean animated underline */}
-                  <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 
-                                 transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                  <span className={`absolute left-0 bottom-0 h-0.5 transition-all duration-300 group-hover:w-full
+                                 ${isActive(item.path) 
+                                   ? 'w-full bg-cyan-400' 
+                                   : 'w-0 bg-cyan-400'
+                                 }`}></span>
+                </Link>
               </motion.li>
             ))}
             
@@ -114,7 +142,7 @@ export default function Navbar() {
           </motion.div>
         </div>
 
-        {/* Mobile Dropdown - Simplified */}
+        {/* Mobile Dropdown - Updated with routing */}
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ 
@@ -134,16 +162,26 @@ export default function Navbar() {
                   animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -30 }}
                   transition={{ delay: i * 0.1, duration: 0.4 }}
                 >
-                  <a
-                    href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="text-slate-300 text-lg font-medium uppercase tracking-wide 
-                             hover:text-cyan-300 transition-all duration-300 block
+                  <Link
+                    to={item.path}
+                    className={`text-lg font-medium uppercase tracking-wide 
+                             transition-all duration-300 block
                              px-4 py-3 rounded-lg hover:bg-slate-800/50
-                             border-l-2 border-transparent hover:border-cyan-400"
-                    onClick={() => setIsOpen(false)}
+                             border-l-2 transition-colors
+                             ${isActive(item.path)
+                               ? 'text-cyan-400 border-cyan-400'
+                               : 'text-slate-300 border-transparent hover:text-cyan-300 hover:border-cyan-400'
+                             }`}
+                    onClick={() => {
+                      setIsOpen(false);
+                      // Scroll to top when navigating
+                      setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }, 100);
+                    }}
                   >
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </motion.li>
               ))}
               
