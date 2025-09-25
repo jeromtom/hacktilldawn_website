@@ -1,3 +1,5 @@
+import { getProjectsCount, getLastUpdated } from './projects-data.js';
+
 export default function handler(req, res) {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,9 +17,27 @@ export default function handler(req, res) {
         return;
     }
     
-    res.json({ 
-        status: 'OK', 
-        timestamp: new Date().toISOString(),
-        message: 'HackTillDawn API is running'
-    });
+    try {
+        const projectsCount = getProjectsCount();
+        const lastUpdated = getLastUpdated();
+        
+        res.json({ 
+            status: 'OK', 
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            projects: {
+                count: projectsCount,
+                lastUpdated: lastUpdated
+            },
+            version: process.env.npm_package_version || '1.0.0',
+            message: 'HackTillDawn API is running'
+        });
+    } catch (error) {
+        console.error('Health check error:', error);
+        res.status(500).json({ 
+            status: 'ERROR', 
+            timestamp: new Date().toISOString(),
+            error: 'Health check failed'
+        });
+    }
 }

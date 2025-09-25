@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test:webhook": "node ./test-integrated-webhook.js",
-    "test:local": "node test-local-webhook.js"
+    "test:local": "node test-local-webhook.js",
+    "start": "node local-server.js",
+    "health": "curl http://localhost:3000/api/health"
   },
   "dependencies": {
     "axios": "^1.12.2",

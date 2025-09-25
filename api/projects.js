@@ -1,6 +1,4 @@
-// In-memory storage (use database in production)
-// This should be moved to a shared database in production
-let projects = [];
+import { getAllProjects, getProjectsCount, getLastUpdated, getProjectReactions, getProjectReplies } from './projects-data.js';
 
 export default function handler(req, res) {
     // Set CORS headers
@@ -19,9 +17,38 @@ export default function handler(req, res) {
         return;
     }
     
-    res.json({
-        projects: projects.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)),
-        totalCount: projects.length,
-        lastUpdated: projects.length > 0 ? projects[0].timestamp : null
-    });
+    try {
+        const projects = getAllProjects();
+        
+        // Enhance projects with reactions and replies data
+        const enhancedProjects = projects.map(project => {
+            const reactions = getProjectReactions(project.messageId);
+            const replies = getProjectReplies(project.messageId);
+            
+            // Count reactions by emoji
+            const reactionCounts = reactions.reduce((acc, reaction) => {
+                const emoji = reaction.emoji;
+                acc[emoji] = (acc[emoji] || 0) + 1;
+                return acc;
+            }, {});
+            
+            return {
+                ...project,
+                reactions: reactions,
+                replies: replies,
+                reactionCounts: reactionCounts,
+                totalReactions: reactions.length,
+                totalReplies: replies.length
+            };
+        });
+        
+        res.json({
+            projects: enhancedProjects,
+            totalCount: getProjectsCount(),
+            lastUpdated: getLastUpdated()
+        });
+    } catch (error) {
+        console.error('Error retrieving projects:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }

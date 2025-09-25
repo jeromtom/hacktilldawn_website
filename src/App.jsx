@@ -4,6 +4,7 @@ import Countdown from "./components/Countdown";
 import About from "./components/About";
 import Register from "./components/Register";
 import ProblemCards from "./components/ProblemCards";
+import ProjectsGallery from "./components/ProjectsGallery";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
       <About />
       
       <ProblemCards />
+      <ProjectsGallery />
       <Footer />
     </>
   );

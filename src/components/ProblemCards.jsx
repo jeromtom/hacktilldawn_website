@@ -145,7 +145,7 @@ export default function ProblemCards() {
               </div>
               
               <div className="flex-1 overflow-hidden">
-                <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500/50 scrollbar-track-transparent pr-2">
+                <div className="h-full overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-500/50 scrollbar-track-transparent">
                   <p className="text-sm text-slate-300 leading-relaxed">
                     {problem.details}
                   </p>
@@ -232,21 +232,6 @@ export default function ProblemCards() {
         </div>
       </div>
 
-      <style jsx>{`
-        .scrollbar-thin::-webkit-scrollbar {
-          width: 4px;
-        }
-        .scrollbar-thumb-blue-500\/50::-webkit-scrollbar-thumb {
-          background-color: rgba(59, 130, 246, 0.5);
-          border-radius: 4px;
-        }
-        .scrollbar-thumb-blue-500\/50::-webkit-scrollbar-thumb:hover {
-          background-color: rgba(59, 130, 246, 0.7);
-        }
-        .scrollbar-track-transparent::-webkit-scrollbar-track {
-          background: transparent;
-        }
-      `}</style>
     </section>
   );
 }
