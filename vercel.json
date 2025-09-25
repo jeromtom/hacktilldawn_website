@@ -22,5 +22,8 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "includeFiles": [
+    "data/**"
   ]
 }
