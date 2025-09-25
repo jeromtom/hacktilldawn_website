@@ -112,9 +112,6 @@ export default function handler(req, res) {
         return;
     }
 
-<<<<<<< HEAD
-    // Validate webhook signature in production
-=======
     // Apply rate limiting
     const clientId = req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown';
     const now = Date.now();
@@ -157,7 +154,6 @@ export default function handler(req, res) {
     res.setHeader('X-RateLimit-Reset', new Date(now + windowMs).toISOString());
 
     // Validate webhook secret in production
->>>>>>> a147a64 (fix: convert webhook.js to Vercel serverless function format)
     if (process.env.NODE_ENV === 'production') {
         const signature = req.headers['x-whapi-signature'] || req.headers['x-hub-signature-256'];
         if (!signature) {
