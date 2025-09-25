@@ -1,23 +1,7 @@
-import express from 'express';
-import cors from 'cors';
 import { addProject, addReaction, addReply } from './projects-data.js';
-import { createRateLimiter } from './rate-limiter.js';
-import { webhookValidationMiddleware } from './webhook-validator.js';
-
-const app = express();
 
 // Security and rate limiting
-const rateLimiter = createRateLimiter(15 * 60 * 1000, 50); // 50 requests per 15 minutes
 const webhookSecret = process.env.WHAPI_WEBHOOK_SECRET || 'default-secret';
-
-app.use(express.json({ limit: '10mb' }));
-app.use(cors({
-    origin: process.env.CORS_ORIGIN || '*',
-    credentials: true
-}));
-
-// Apply rate limiting
-app.use(rateLimiter);
 
 // Parse the structured message format
 function parseProjectMessage(message) {
@@ -128,7 +112,52 @@ export default function handler(req, res) {
         return;
     }
 
+<<<<<<< HEAD
     // Validate webhook signature in production
+=======
+    // Apply rate limiting
+    const clientId = req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown';
+    const now = Date.now();
+    const windowMs = 15 * 60 * 1000; // 15 minutes
+    const maxRequests = 50;
+    const windowStart = now - windowMs;
+
+    // Get or create client data (simplified rate limiting for serverless)
+    if (!global.rateLimitMap) {
+        global.rateLimitMap = new Map();
+    }
+    
+    let clientData = global.rateLimitMap.get(clientId);
+    if (!clientData) {
+        clientData = { requests: [], timestamp: now };
+        global.rateLimitMap.set(clientId, clientData);
+    }
+
+    // Remove old requests from the window
+    clientData.requests = clientData.requests.filter(timestamp => timestamp > windowStart);
+
+    // Check if limit exceeded
+    if (clientData.requests.length >= maxRequests) {
+        const resetTime = Math.ceil((clientData.requests[0] + windowMs - now) / 1000);
+        return res.status(429).json({
+            error: 'Too many requests',
+            retryAfter: resetTime,
+            limit: maxRequests,
+            remaining: 0
+        });
+    }
+
+    // Add current request
+    clientData.requests.push(now);
+    clientData.timestamp = now;
+
+    // Set rate limit headers
+    res.setHeader('X-RateLimit-Limit', maxRequests);
+    res.setHeader('X-RateLimit-Remaining', maxRequests - clientData.requests.length);
+    res.setHeader('X-RateLimit-Reset', new Date(now + windowMs).toISOString());
+
+    // Validate webhook secret in production
+>>>>>>> a147a64 (fix: convert webhook.js to Vercel serverless function format)
     if (process.env.NODE_ENV === 'production') {
         const signature = req.headers['x-whapi-signature'] || req.headers['x-hub-signature-256'];
         if (!signature) {
@@ -140,7 +169,7 @@ export default function handler(req, res) {
         // For now, we'll just check if it exists
     }
     
-    const { body } = req;
+    const body = req.body;
     
     // Target group name
     const TARGET_GROUP = "HackTillDawn Final Participants";
