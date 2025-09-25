@@ -10,7 +10,7 @@ export default function Countdown() {
   });
 
   useEffect(() => {
-    const target = new Date("2025-09-26T00:00:00");
+    const target = new Date("2025-09-25T00:15:15");
     const interval = setInterval(() => {
       const now = new Date();
       const diff = target - now;
