@@ -4,6 +4,7 @@ import { createServer } from 'http';
 import { spawn } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import messageFetcher from './api/message-fetcher.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -310,6 +311,11 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// Message fetcher status endpoint
+app.get('/api/fetcher-status', (req, res) => {
+    res.json(messageFetcher.getStatus());
+});
+
 app.post('/api/test-project', (req, res) => {
     const { name, description, url } = req.body;
     
@@ -343,13 +349,25 @@ const PORT = process.env.PORT || 3001;
 // Start the server
 const server = createServer(app);
 
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
     console.log('🚀 Local Development Server Started!');
     console.log(`📡 API Server: http://localhost:${PORT}`);
     console.log(`🌐 Frontend: http://localhost:${PORT}`);
     console.log(`📊 Projects API: http://localhost:${PORT}/api/projects`);
     console.log(`🔗 Webhook: http://localhost:${PORT}/api/webhook`);
     console.log(`❤️ Health: http://localhost:${PORT}/api/health`);
+    console.log(`🔄 Fetcher Status: http://localhost:${PORT}/api/fetcher-status`);
+    
+    // Start the message fetcher
+    console.log('\n🔄 Starting Message Fetcher...');
+    try {
+        await messageFetcher.start();
+        console.log('✅ Message fetcher started successfully');
+    } catch (error) {
+        console.log('⚠️ Message fetcher failed to start:', error.message);
+        console.log('💡 You can still use the webhook for real-time updates');
+    }
+    
     console.log('\n📝 Test the webhook with:');
     console.log(`curl -X POST http://localhost:${PORT}/api/webhook \\`);
     console.log(`  -H "Content-Type: application/json" \\`);
@@ -360,6 +378,10 @@ server.listen(PORT, () => {
 // Graceful shutdown
 process.on('SIGINT', () => {
     console.log('\n🛑 Shutting down server...');
+    
+    // Stop the message fetcher
+    messageFetcher.stop();
+    
     server.close(() => {
         console.log('✅ Server stopped');
         process.exit(0);
