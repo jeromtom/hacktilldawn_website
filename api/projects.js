@@ -1,4 +1,4 @@
-// Sample projects data for testing and demonstration
+// CommonJS version for better Vercel compatibility
 const sampleProjects = [
   {
     name: "EcoTrack - Carbon Footprint Tracker",
@@ -126,7 +126,7 @@ function getProjectReplies(messageId) {
     return replies.filter(r => r.quotedMessageId === messageId);
 }
 
-export default function handler(req, res) {
+function handler(req, res) {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -208,3 +208,5 @@ export default function handler(req, res) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+module.exports = handler;
