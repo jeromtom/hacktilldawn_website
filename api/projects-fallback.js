@@ -20,11 +20,19 @@ function loadProjects() {
 // Get all projects with fallback
 export async function getAllProjectsWithFallback() {
     try {
-        // Try database first
-        const { getAllProjects } = await import('../database/projects-db.js');
+        // Try Supabase first
+        const { getAllProjects } = await import('../database/supabase-projects.js');
         return await getAllProjects();
     } catch (error) {
-        console.warn('Database unavailable, falling back to file storage:', error.message);
+        console.warn('Supabase unavailable, trying MySQL fallback:', error.message);
+        
+        try {
+            // Try MySQL fallback
+            const { getAllProjects } = await import('../database/projects-db.js');
+            return await getAllProjects();
+        } catch (mysqlError) {
+            console.warn('MySQL also unavailable, falling back to file storage:', mysqlError.message);
+        }
         
         // Fallback to file storage
         const projects = loadProjects();
@@ -57,10 +65,20 @@ export async function getAllProjectsWithFallback() {
 // Get projects count with fallback
 export async function getProjectsCountWithFallback() {
     try {
-        const { getProjectsCount } = await import('../database/projects-db.js');
+        // Try Supabase first
+        const { getProjectsCount } = await import('../database/supabase-projects.js');
         return await getProjectsCount();
     } catch (error) {
-        console.warn('Database unavailable, falling back to file storage for count');
+        console.warn('Supabase unavailable, trying MySQL fallback for count:', error.message);
+        
+        try {
+            // Try MySQL fallback
+            const { getProjectsCount } = await import('../database/projects-db.js');
+            return await getProjectsCount();
+        } catch (mysqlError) {
+            console.warn('MySQL also unavailable, falling back to file storage for count:', mysqlError.message);
+        }
+        
         const projects = loadProjects();
         return projects.length;
     }
@@ -69,10 +87,20 @@ export async function getProjectsCountWithFallback() {
 // Get last updated with fallback
 export async function getLastUpdatedWithFallback() {
     try {
-        const { getLastUpdated } = await import('../database/projects-db.js');
+        // Try Supabase first
+        const { getLastUpdated } = await import('../database/supabase-projects.js');
         return await getLastUpdated();
     } catch (error) {
-        console.warn('Database unavailable, falling back to file storage for last updated');
+        console.warn('Supabase unavailable, trying MySQL fallback for last updated:', error.message);
+        
+        try {
+            // Try MySQL fallback
+            const { getLastUpdated } = await import('../database/projects-db.js');
+            return await getLastUpdated();
+        } catch (mysqlError) {
+            console.warn('MySQL also unavailable, falling back to file storage for last updated:', mysqlError.message);
+        }
+        
         const projects = loadProjects();
         return projects.length > 0 ? projects[0].timestamp : null;
     }

@@ -84,11 +84,19 @@ function saveReplies(replies) {
 // Add project with fallback
 export async function addProjectWithFallback(project) {
     try {
-        // Try database first
-        const { addProject } = await import('../database/projects-db.js');
+        // Try Supabase first
+        const { addProject } = await import('../database/supabase-projects.js');
         return await addProject(project);
     } catch (error) {
-        console.warn('Database unavailable, falling back to file storage for project:', error.message);
+        console.warn('Supabase unavailable, trying MySQL fallback for project:', error.message);
+        
+        try {
+            // Try MySQL fallback
+            const { addProject } = await import('../database/projects-db.js');
+            return await addProject(project);
+        } catch (mysqlError) {
+            console.warn('MySQL also unavailable, falling back to file storage for project:', mysqlError.message);
+        }
         
         // Fallback to file storage
         const projects = loadProjects();
@@ -141,11 +149,19 @@ export async function addProjectWithFallback(project) {
 // Add reaction with fallback
 export async function addReactionWithFallback(reactionData) {
     try {
-        // Try database first
-        const { addReaction } = await import('../database/projects-db.js');
+        // Try Supabase first
+        const { addReaction } = await import('../database/supabase-projects.js');
         return await addReaction(reactionData);
     } catch (error) {
-        console.warn('Database unavailable, falling back to file storage for reaction:', error.message);
+        console.warn('Supabase unavailable, trying MySQL fallback for reaction:', error.message);
+        
+        try {
+            // Try MySQL fallback
+            const { addReaction } = await import('../database/projects-db.js');
+            return await addReaction(reactionData);
+        } catch (mysqlError) {
+            console.warn('MySQL also unavailable, falling back to file storage for reaction:', mysqlError.message);
+        }
         
         // Fallback to file storage
         const reactions = loadReactions();
@@ -172,11 +188,19 @@ export async function addReactionWithFallback(reactionData) {
 // Add reply with fallback
 export async function addReplyWithFallback(replyData) {
     try {
-        // Try database first
-        const { addReply } = await import('../database/projects-db.js');
+        // Try Supabase first
+        const { addReply } = await import('../database/supabase-projects.js');
         return await addReply(replyData);
     } catch (error) {
-        console.warn('Database unavailable, falling back to file storage for reply:', error.message);
+        console.warn('Supabase unavailable, trying MySQL fallback for reply:', error.message);
+        
+        try {
+            // Try MySQL fallback
+            const { addReply } = await import('../database/projects-db.js');
+            return await addReply(replyData);
+        } catch (mysqlError) {
+            console.warn('MySQL also unavailable, falling back to file storage for reply:', mysqlError.message);
+        }
         
         // Fallback to file storage
         const replies = loadReplies();
